@@ -59,9 +59,3 @@ These files look like completion notes or duplicates and can be removed or archi
 - `docs/NOTIFICATION_SYSTEM_COMPLETE.md` (duplicate of `docs/NOTIFICATION_SYSTEM_GUIDE.md`)
 - `docs/PREMIUM_MOBILE_EXPERIENCE_COMPLETE.md` (summary/notes related to mobile premium experience)
 - `docs/STARTUP_OPTIMIZATION_COMPLETE.md` (final notes; may be archived)
-
-If you prefer I can move these into an `docs/archive/` folder instead of deleting them.
-
----
-
-If you want, I can now remove any files you mark as unwanted or move them to `docs/archive/`. Tell me which option you prefer. If you want me to auto-detect duplicates and remove them, I can propose a conservative set and apply the deletions.
