@@ -1,0 +1,237 @@
+<!-- ===== AI STUDY COACH INTEGRATION GUIDE ===== -->
+<!-- Add these script tags to your index.html BEFORE the closing </body> tag -->
+
+<!-- AI Coach Core Modules -->
+<script src="js/ai-coach/behaviorAnalyzer.js"></script>
+<script src="js/ai-coach/weakSubjectDetector.js"></script>
+<script src="js/ai-coach/productivityPredictor.js"></script>
+<script src="js/ai-coach/examPreparationAdvisor.js"></script>
+<script src="js/ai-coach/studyPatternAnalyzer.js"></script>
+<script src="js/ai-coach/motivationGenerator.js"></script>
+<script src="js/ai-coach/studyRecommendationEngine.js"></script>
+<script src="js/ai-coach/aiCoachEngine.js"></script>
+<script src="js/ai-coach/coachUIRenderer.js"></script>
+
+<!-- Optional: Test Data Generator (for development only, remove in production) -->
+<script src="js/ai-coach/testDataGenerator.js"></script>
+
+<!-- Add this CSS link to your <head> section -->
+<link rel="stylesheet" href="js/ai-coach/ai-coach.css">
+
+<!-- ===== SAMPLE HTML STRUCTURE ===== -->
+<!-- Add this to create an AI Coach dashboard page/tab -->
+
+<!-- Option 1: As a separate tab in your navigation -->
+<div class="tab-content" id="aiCoachTab" style="display: none;">
+    <div id="aiCoachDashboard"></div>
+</div>
+
+<!-- Option 2: As a modal popup -->
+<div id="aiCoachModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="aiCoachDashboard"></div>
+    </div>
+</div>
+
+<!-- Option 3: As a dedicated page section -->
+<section id="ai-coach-section" class="page-section">
+    <div id="aiCoachDashboard"></div>
+</section>
+
+<!-- ===== EVENT DISPATCH INTEGRATION ===== -->
+<!-- Add these event dispatches to your existing functions -->
+
+<script>
+// Example 1: After completing a focus session
+function onFocusSessionComplete() {
+    // Your existing code to save the focus session...
+    
+    // Trigger AI Coach update
+    document.dispatchEvent(new Event('focusSessionCompleted'));
+}
+
+// Example 2: After completing a task
+function markTaskAsComplete(taskId) {
+    // Your existing code to mark task complete...
+    
+    // Trigger AI Coach update
+    document.dispatchEvent(new Event('taskCompleted'));
+}
+
+// Example 3: After updating a habit
+function updateHabit(habitId) {
+    // Your existing code to update habit...
+    
+    // Trigger AI Coach update
+    document.dispatchEvent(new Event('habitUpdated'));
+}
+
+// Example 4: After adding an exam
+function addNewExam(examData) {
+    // Your existing code to add exam...
+    
+    // Trigger AI Coach update
+    document.dispatchEvent(new Event('examAdded'));
+}
+
+// Example 5: Show AI Coach dashboard when tab is clicked
+document.getElementById('aiCoachTabButton').addEventListener('click', function() {
+    // Show the AI Coach tab
+    document.getElementById('aiCoachTab').style.display = 'block';
+    
+    // Render the dashboard (will use cached data if fresh)
+    CoachUIRenderer.renderDashboard();
+    
+    // Optional: Force refresh
+    // AICoachEngine.recalculateInsights('manual_refresh');
+});
+</script>
+
+<!-- ===== QUICK START FOR TESTING ===== -->
+<!-- Use these commands in the browser console to test -->
+
+<script>
+// Quick Test Commands (run in browser console after page loads)
+
+// 1. Generate test data
+// TestDataGenerator.generateAll();
+
+// 2. View AI Coach data
+// console.log(AICoachEngine.getCoachData());
+
+// 3. Manually render dashboard
+// CoachUIRenderer.renderDashboard();
+
+// 4. Test with excellent student scenario
+// TestDataGenerator.scenarios.excellentStudent();
+// AICoachEngine.recalculateInsights();
+// CoachUIRenderer.renderDashboard();
+
+// 5. Clear all test data
+// TestDataGenerator.clearAll();
+</script>
+
+<!-- ===== COMPLETE INTEGRATION EXAMPLE ===== -->
+<!-- Full example showing complete integration -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodify - AI Study Coach</title>
+    
+    <!-- Your existing stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- AI Coach CSS -->
+    <link rel="stylesheet" href="js/ai-coach/ai-coach.css">
+</head>
+<body>
+    <!-- Your existing navigation -->
+    <nav>
+        <button data-tab="dashboard">Dashboard</button>
+        <button data-tab="tasks">Tasks</button>
+        <button data-tab="habits">Habits</button>
+        <button data-tab="ai-coach" id="aiCoachTabButton">🤖 AI Coach</button>
+    </nav>
+    
+    <!-- Your existing tabs -->
+    <div id="dashboard-tab" class="tab-content">
+        <!-- Dashboard content -->
+    </div>
+    
+    <div id="tasks-tab" class="tab-content" style="display: none;">
+        <!-- Tasks content -->
+    </div>
+    
+    <div id="habits-tab" class="tab-content" style="display: none;">
+        <!-- Habits content -->
+    </div>
+    
+    <!-- AI Coach Tab -->
+    <div id="ai-coach-tab" class="tab-content" style="display: none;">
+        <div id="aiCoachDashboard"></div>
+    </div>
+    
+    <!-- Your existing scripts -->
+    <script src="js/core/data.js"></script>
+    <script src="js/core/ui.js"></script>
+    <!-- ... other scripts ... -->
+    
+    <!-- AI Coach Scripts (load after core scripts) -->
+    <script src="js/ai-coach/behaviorAnalyzer.js"></script>
+    <script src="js/ai-coach/weakSubjectDetector.js"></script>
+    <script src="js/ai-coach/productivityPredictor.js"></script>
+    <script src="js/ai-coach/examPreparationAdvisor.js"></script>
+    <script src="js/ai-coach/studyPatternAnalyzer.js"></script>
+    <script src="js/ai-coach/motivationGenerator.js"></script>
+    <script src="js/ai-coach/studyRecommendationEngine.js"></script>
+    <script src="js/ai-coach/aiCoachEngine.js"></script>
+    <script src="js/ai-coach/coachUIRenderer.js"></script>
+    <script src="js/ai-coach/testDataGenerator.js"></script>
+    
+    <!-- Tab switching logic -->
+    <script>
+        // Handle tab switching
+        document.querySelectorAll('[data-tab]').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // Hide all tabs
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.style.display = 'none';
+                });
+                
+                // Show selected tab
+                const selectedTab = document.getElementById(tabName + '-tab');
+                if (selectedTab) {
+                    selectedTab.style.display = 'block';
+                    
+                    // If AI Coach tab, render dashboard
+                    if (tabName === 'ai-coach') {
+                        CoachUIRenderer.renderDashboard();
+                    }
+                }
+                
+                // Update active button
+                document.querySelectorAll('[data-tab]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- ===== INTEGRATION CHECKLIST ===== -->
+<!--
+✅ Step 1: Add AI Coach CSS to <head>
+✅ Step 2: Add AI Coach scripts before </body>
+✅ Step 3: Create container <div id="aiCoachDashboard"></div>
+✅ Step 4: Add event dispatches to existing functions
+✅ Step 5: Add tab/button to navigate to AI Coach
+✅ Step 6: Test with TestDataGenerator.generateAll()
+✅ Step 7: Verify dashboard renders correctly
+✅ Step 8: Remove testDataGenerator.js in production
+-->
+
+<!-- ===== CUSTOMIZATION OPTIONS ===== -->
+<!--
+1. Change cache duration:
+   Edit CONFIG.CACHE_DURATION in aiCoachEngine.js
+
+2. Modify analysis window:
+   Edit CONFIG.ANALYSIS_WINDOW_DAYS in behaviorAnalyzer.js
+
+3. Adjust recommendation count:
+   Edit CONFIG.MAX_RECOMMENDATIONS in studyRecommendationEngine.js
+
+4. Customize colors:
+   Edit CONFIG.PRIORITY_COLORS in coachUIRenderer.js
+
+5. Change auto-refresh interval:
+   Edit CONFIG.CONFIG.REFRESH_INTERVAL in coachUIRenderer.js
+-->

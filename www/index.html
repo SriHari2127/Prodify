@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Prodify</title>
+
+    <!-- iOS / Android PWA & Native App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Prodify">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- App Icons -->
+    <link rel="icon" type="image/png" href="icons/favicon.png">
+    <link rel="apple-touch-icon" href="icons/favicon.png">
+    <link rel="manifest" href="manifest.json">
+
+
+    <link rel="stylesheet" href="css/style.css?v=20260522">
+    <link rel="stylesheet" href="css/premium-loader.css">
+    <link rel="stylesheet" href="css/premium-interactions.css">
+    <link rel="stylesheet" href="js/calendar/calendar.css?v=1">
+    <link rel="stylesheet" href="js/ai-coach/ai-coach.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="light">
+    <!-- Premium Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+        <div class="splash-logo-simple"><i class="fa-solid fa-rocket"></i></div>
+        <div class="splash-title-simple">Prodify</div>
+        <div class="splash-loading-bar">
+            <div class="splash-loading-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- Auth Section -->
+    <div class="auth-container auth-hidden" id="authContainer">
+        <!-- Animated background orbs -->
+        <div class="auth-orb auth-orb--1"></div>
+        <div class="auth-orb auth-orb--2"></div>
+        <div class="auth-orb auth-orb--3"></div>
+
+        <div class="auth-box">
+            <!-- Logo / Brand Area -->
+            <div class="auth-logo auth-stagger-1">
+                <div class="auth-logo__ring">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+            </div>
+            <h2 id="authTitle" class="auth-stagger-2">Login to Prodify</h2>
+            <p class="auth-tagline auth-stagger-2">Focus. Track. Achieve.</p>
+
+            <div class="auth-input-group auth-stagger-3">
+                <div class="auth-field">
+                    <i class="fa-solid fa-envelope auth-field__icon"></i>
+                    <input type="email" id="authEmail" placeholder="Email address" required>
+                </div>
+                <div class="auth-field">
+                    <i class="fa-solid fa-lock auth-field__icon"></i>
+                    <input type="password" id="authPassword" placeholder="Password" required>
+                    <button type="button" id="togglePassword" class="password-toggle-btn" aria-label="Show password">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <div class="auth-forgot-row" id="authForgotRow">
+                    <a href="#" id="forgotPasswordLink" class="auth-forgot-link">Forgot Password?</a>
+                </div>
+            </div>
+
+            <div id="authErrorMsg" class="auth-error"></div>
+            <button id="authSubmitBtn" class="auth-btn auth-btn--primary auth-stagger-4">Login</button>
+
+            <div class="auth-divider auth-stagger-5">
+                <span>or</span>
+            </div>
+
+            <button id="authGoogleBtn" class="auth-btn auth-btn--google auth-stagger-5">
+                <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                        fill="#4285F4" />
+                    <path
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                        fill="#34A853" />
+                    <path
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                        fill="#FBBC05" />
+                    <path
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                        fill="#EA4335" />
+                </svg>
+                Sign in with Google
+            </button>
+
+            <button id="authAnonymousBtn" class="auth-btn auth-btn--secondary auth-stagger-5">Continue Without
+                Account</button>
+
+            <p class="auth-switch-text auth-stagger-6">
+                <span id="authSwitchPrompt">Don't have an account?</span>
+                <a href="#" id="authSwitchLink">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Tabs Sidebar -->
+    <div id="tabsSidebar" class="tabs-sidebar">
+        <div class="sidebar-header">
+            <h3>All Tabs</h3>
+            <button id="closeSidebarBtn" class="close-sidebar-btn">✕</button>
+        </div>
+        <div class="sidebar-content">
+            <ul id="sidebarTabList" class="sidebar-tab-list">
+                <!-- Tabs will be populated by JS -->
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Main App (Hidden by default) -->
+    <div class="container" id="appContainer" style="display: none;">
+
+        <div class="header">
+            <div class="header-left">
+                <button id="tabsMenuBtn" class="tabs-menu-btn" aria-label="Open Tabs Menu">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="header-titles">
+                    <h1>Prodify</h1>
+                    <p class="app-subtitle">Focus. Track. Achieve.</p>
+                </div>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme">
+                    <span class="theme-toggle-icon theme-icon-sun"><i class="fa-solid fa-sun"></i></span>
+                    <span class="theme-toggle-icon theme-icon-moon"><i class="fa-solid fa-moon"></i></span>
+                </button>
+                <input type="checkbox" id="themeToggle" hidden>
+                <button id="profileBtn" class="profile-btn" aria-label="Profile &amp; Settings">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn" data-tab="today" title="Home">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 2l9 9"/><path d="M21 21H3V11"/></svg>
+                <span>Home</span>
+            </button>
+            <button class="tab-btn" data-tab="tasks" title="Tasks">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <span>Tasks</span>
+            </button>
+            <button class="tab-btn" data-tab="habits" title="Habits">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Habits</span>
+            </button>
+            <button class="tab-btn" data-tab="notes" title="Notes">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.75A1.75 1.75 0 0 1 5.75 3h10.5A1.75 1.75 0 0 1 18 4.75v14.75"/><path d="M6 8h8"/><path d="M6 12h6"/><path d="M6 16h4"/></svg>
+                <span>Notes</span>
+            </button>
+            <button class="tab-btn" data-tab="academics" title="Academics">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <span>Academics</span>
+            </button>
+            <button class="tab-btn" data-tab="calendar" title="Calendar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span>Calendar</span>
+            </button>
+            <button class="tab-btn" data-tab="ai-coach" title="AI Coach">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M8 6v2a4 4 0 0 0 8 0V6"/><rect x="6" y="10" width="12" height="10" rx="2"/></svg>
+                <span>AI Coach</span>
+            </button>
+        </div>
+        <div id="tabsIndicator" style="display: none;"></div>
+
+        <!-- Tabs sliding track (mobile: translates on swipe; desktop: static block) -->
+        <div class="tabs-wrapper">
+            <div class="tabs-track" id="tabsTrack">
+
+                <!-- Today Dashboard Tab -->
+                <div class="tab-content active" id="today-tab">
+                    <div class="home">
+                        <!-- Greeting with Skeleton -->
+                        <div id="dashboardGreeting">
+                            <div class="skeleton-dashboard__greeting">
+                                <div class="skeleton skeleton-avatar"></div>
+                                <div style="flex: 1;">
+                                    <div class="skeleton skeleton-text--title"></div>
+                                    <div class="skeleton skeleton-text--subtitle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Next Session Widget with Skeleton -->
+                        <div id="nextSessionWidget">
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text--title"></div>
+                                <div class="skeleton skeleton-text" style="margin-top: 12px;"></div>
+                                <div class="skeleton skeleton-text"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Smart Study Schedule with Skeleton -->
+                        <div id="todayScheduleContainer">
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text--title"></div>
+                                <div class="skeleton skeleton-text" style="margin-top: 16px;"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="dashboardStudyPlanner"></div>
+                        
+                        <!-- Productivity Score with Skeleton -->
+                        <div id="dashboardProdScore">
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text--title"></div>
+                                <div class="skeleton skeleton-text" style="margin-top: 12px; height: 80px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tasks List with Skeleton -->
+                        <div id="dashboardTasksList">
+                            <div class="skeleton-card">
+                                <div class="skeleton skeleton-text--title" style="margin-bottom: 16px;"></div>
+                                <div class="skeleton-task">
+                                    <div class="skeleton skeleton-task__checkbox"></div>
+                                    <div class="skeleton-task__content">
+                                        <div class="skeleton skeleton-text"></div>
+                                    </div>
+                                </div>
+                                <div class="skeleton-task">
+                                    <div class="skeleton skeleton-task__checkbox"></div>
+                                    <div class="skeleton-task__content">
+                                        <div class="skeleton skeleton-text"></div>
+                                    </div>
+                                </div>
+                                <div class="skeleton-task">
+                                    <div class="skeleton skeleton-task__checkbox"></div>
+                                    <div class="skeleton-task__content">
+                                        <div class="skeleton skeleton-text" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="home__row">
+                            <div id="dashboardHabitSummary" class="home__half"></div>
+                            <div id="dashboardStudyProgress" class="home__half"></div>
+                        </div>
+                        <div id="dashboardXpSummary"></div>
+                    </div>
+                </div>
+
+                <!-- Tasks Tab -->
+                <div class="tab-content" id="tasks-tab">
+                    <div class="task-header">
+                        <h2 class="task-header__title">Task Manager</h2>
+                        <p class="task-header__sub">Manage your to-dos and priorities</p>
+                    </div>
+
+                    <!-- Focus Mode Toggle -->
+                    <div class="focus-mode-bar">
+                        <button id="focusModeBtn" class="focus-mode-pill" aria-pressed="false">
+                            <span class="focus-label">Focus Mode</span>
+                        </button>
+                        <span id="focusModeHint" class="focus-mode-hint" style="display:none;">Showing top tasks for
+                            today</span>
+                    </div>
+
+                    <div class="input-section" id="taskInputSection">
+                        <div class="task-input-row">
+                            <input type="text" id="taskInput" placeholder="Enter your task...">
+                            <button id="addBtn">Add</button>
+                        </div>
+                        <p id="task-error" class="input-error-msg">Please enter a task</p>
+
+                        <!-- Expandable Options -->
+                        <div id="taskOptions" class="task-options collapsed">
+                            <div class="option-group">
+                                <label for="dueDate">Deadline Date</label>
+                                <input type="date" id="dueDate">
+                            </div>
+                            <div class="option-group">
+                                <label for="dueTime">Due Time</label>
+                                <input type="time" id="dueTime">
+                            </div>
+                            <div class="option-group priority-group">
+                                <label for="taskPriority">Priority</label>
+                                <select id="taskPriority">
+                                    <option value="" disabled selected>Select Priority</option>
+                                    <option value="vital-quick"><i class="fa-solid fa-circle text-vital-quick"></i>
+                                        Vital &amp; Quick (Do First)</option>
+                                    <option value="vital-notquick"><i
+                                            class="fa-solid fa-circle text-vital-notquick"></i> Vital, Not Quick
+                                        (Schedule)</option>
+                                    <option value="notvital-quick"><i
+                                            class="fa-solid fa-circle text-notvital-quick"></i> Not Vital, Quick
+                                        (Optional)</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label for="taskSubjectSelect">Subject</label>
+                                <select id="taskSubjectSelect" class="priority-select subject-select">
+                                    <option value="">No Subject</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label for="taskRecurrence">Repeat</label>
+                                <select id="taskRecurrence" class="priority-select">
+                                    <option value="none">No Repeat</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="biweekly">Bi-weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                            </div>
+                            <div class="option-group subtasks-group">
+                                <label for="initialSubtasks">Subtasks</label>
+                                <input type="text" id="initialSubtasks" placeholder="e.g., Research, Draft, Review">
+                            </div>
+                            <div
+                                style="width: 100%; display: flex; justify-content: flex-end; margin-top: 4px; margin-bottom: 2px;">
+                                <button type="button" id="cancelTaskFormBtn" class="cancel-ai-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Elements hidden in Focus Mode -->
+                    <div id="focusHideables">
+                        <!-- Progress Bar -->
+                        <div class="task-progress">
+                            <div class="task-progress__labels">
+                                <span class="task-progress__title">Progress</span>
+                                <span class="task-progress__pct" id="progressText">0%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div id="progressBar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Task Counter -->
+                        <p id="taskCounter">0 Tasks Remaining</p>
+
+                        <!-- Task Filters -->
+                        <div class="task-filters">
+                            <button id="allFilter" class="task-filters__btn active"><i
+                                    class="fa-solid fa-layer-group"></i> All</button>
+                            <button id="activeFilter" class="task-filters__btn"><i class="fa-regular fa-circle"></i>
+                                Active</button>
+                            <button id="completedFilter" class="task-filters__btn"><i
+                                    class="fa-solid fa-circle-check"></i> Done</button>
+                        </div>
+
+                        <!-- Statistics Panel -->
+                        <div class="task-stats">
+                            <h3 class="task-stats__heading"><i class="fa-solid fa-chart-simple"></i> Statistics</h3>
+                            <div class="task-stats__grid">
+                                <div class="task-stats__card">
+                                    <div class="task-stats__icon" style="color:#4CAF50"><i
+                                            class="fa-solid fa-circle-check"></i></div>
+                                    <div class="task-stats__value" id="todayCount">0</div>
+                                    <div class="task-stats__label">Today</div>
+                                </div>
+                                <div class="task-stats__card">
+                                    <div class="task-stats__icon" style="color:#2196F3"><i
+                                            class="fa-solid fa-calendar-week"></i></div>
+                                    <div class="task-stats__value" id="weekCount">0</div>
+                                    <div class="task-stats__label">This Week</div>
+                                </div>
+                                <div class="task-stats__card">
+                                    <div class="task-stats__icon" style="color:#ff9800"><i class="fa-solid fa-fire"></i>
+                                    </div>
+                                    <div class="task-stats__value" id="streakCount">0</div>
+                                    <div class="task-stats__label">Streak</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Task List -->
+                    <ul id="taskList">
+                        <!-- Task Skeleton Placeholders -->
+                        <li class="skeleton-task">
+                            <div class="skeleton skeleton-task__checkbox"></div>
+                            <div class="skeleton-task__content">
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text" style="width: 60%; height: 12px;"></div>
+                            </div>
+                        </li>
+                        <li class="skeleton-task">
+                            <div class="skeleton skeleton-task__checkbox"></div>
+                            <div class="skeleton-task__content">
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text" style="width: 70%; height: 12px;"></div>
+                            </div>
+                        </li>
+                        <li class="skeleton-task">
+                            <div class="skeleton skeleton-task__checkbox"></div>
+                            <div class="skeleton-task__content">
+                                <div class="skeleton skeleton-text" style="width: 85%;"></div>
+                                <div class="skeleton skeleton-text" style="width: 50%; height: 12px;"></div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Empty State -->
+                    <div id="tasksEmptyState" class="empty-state">
+                        <div class="empty-state__icon"><i class="fa-solid fa-list-check"></i></div>
+                        <p class="empty-state__title">No tasks yet</p>
+                        <p class="empty-state__subtitle">Start by adding your first task</p>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Habits Tab -->
+                <div class="tab-content" id="habits-tab">
+                    <div class="habit-header">
+                        <h2 class="habit-header__title">Habit Manager</h2>
+                        <p class="habit-header__sub">Build and track daily routines</p>
+                    </div>
+
+                    <!-- Add Habit Section -->
+                    <div class="input-section">
+                        <div class="habit-input-container">
+                            <input type="text" id="habitInput" placeholder="Enter a new habit...">
+                            <button id="aiHabitBtn" class="ai-habits-btn" aria-label="AI Habit Suggestions">
+                                <span class="ai-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span> AI
+                            </button>
+                        </div>
+                        <p id="habit-error" class="input-error-msg">Please enter a habit</p>
+
+                        <!-- Suggestions Container (Independent Sibling) -->
+                        <div id="aiSuggestionsContainer" class="ai-suggestions-container" style="display: none;">
+                        </div>
+
+                        <!-- Expandable Options -->
+                        <div id="habitOptions" class="task-options collapsed">
+
+                            <div class="input-options">
+                                <div class="habit-options-row">
+                                    <div class="frequency-container">
+                                        <div class="reminders-box-title">Custom frequency</div>
+                                        <select id="habitFrequency" class="priority-select w-full">
+                                            <option value="daily">Daily</option>
+                                            <option value="weekly">Weekly (Any 3 days)</option>
+                                            <option value="specific_days">Specific Days</option>
+                                        </select>
+                                        <div id="specificDaysContainer" style="display: none;" class="day-checkboxes">
+                                            <label><input type="checkbox" value="Mon"> M</label>
+                                            <label><input type="checkbox" value="Tue"> T</label>
+                                            <label><input type="checkbox" value="Wed"> W</label>
+                                            <label><input type="checkbox" value="Thu"> T</label>
+                                            <label><input type="checkbox" value="Fri"> F</label>
+                                            <label><input type="checkbox" value="Sat"> S</label>
+                                            <label><input type="checkbox" value="Sun"> S</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="reminders-box" id="remindersBox">
+                                        <div class="reminders-box-title">Reminders</div>
+                                        <div id="habitRemindersContainer" class="reminders-container">
+                                            <div class="reminder-row">
+                                                <input type="time" class="habit-reminder-input priority-select"
+                                                    title="Set Reminder Time">
+                                                <button type="button" id="addReminderBtn" class="small-btn"
+                                                    title="Add another reminder">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                style="width: 100%; display: flex; justify-content: flex-end; margin-top: 10px; margin-bottom: 5px;">
+                                <button type="button" id="cancelHabitFormBtn" class="cancel-ai-btn">Cancel</button>
+                            </div>
+                        </div> <!-- End habitOptions -->
+                        <button id="addHabitBtn">Add Habit</button>
+                    </div>
+
+                    <!-- Habits List (now correctly inside the Habits tab slot) -->
+                    <ul id="habitList">
+                        <!-- Habit Skeleton Placeholders -->
+                        <li class="skeleton-card" style="margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div class="skeleton skeleton-avatar--small"></div>
+                                <div style="flex: 1;">
+                                    <div class="skeleton skeleton-text"></div>
+                                    <div class="skeleton skeleton-text" style="width: 60%; height: 12px; margin-top: 8px;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="skeleton-card" style="margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div class="skeleton skeleton-avatar--small"></div>
+                                <div style="flex: 1;">
+                                    <div class="skeleton skeleton-text"></div>
+                                    <div class="skeleton skeleton-text" style="width: 70%; height: 12px; margin-top: 8px;"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Habits Empty State -->
+                    <div id="habitsEmptyState" class="empty-state">
+                        <div class="empty-state__icon"><i class="fa-solid fa-fire"></i></div>
+                        <p class="empty-state__title">No habits created</p>
+                        <p class="empty-state__subtitle">Build your first habit</p>
+                    </div>
+                </div><!-- /#habits-tab -->
+
+                <!-- Academics Tab (3rd slide) -->
+                <div class="tab-content" id="academics-tab">
+                    <div class="acad-header">
+                        <div class="acad-header__title">
+                            <span>Academics</span>
+                        </div>
+                        <span class="acad-header__sub">Organize studies and track exams</span>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <!-- Subject Chips -->
+                        <div class="subject-chip-strip" id="subjectChipStrip"></div>
+
+
+                        <!-- Add Subject Box -->
+                        <div id="addSubjectBox" class="input-section collapsed"
+                            style="display: none; transition: max-height 0.3s ease; margin-top: 10px;">
+                            <div class="task-input-row">
+                                <input type="text" id="newSubjectInput" placeholder="Enter subject name...">
+                                <button id="saveSubjectBtn">Add</button>
+                            </div>
+                            <div style="width: 100%; display: flex; justify-content: flex-end; margin-top: 4px;">
+                                <button type="button" id="cancelSubjectFormBtn" class="cancel-ai-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Focus Timer -->
+                    <div class="acad-card">
+                        <div class="acad-card__head">
+                            <i class="fa-solid fa-crosshairs"></i>
+                            <span>Focus Timer</span>
+                        </div>
+                        <div class="acad-focus">
+                            <div class="acad-focus__ring">
+                                <svg viewBox="0 0 260 260">
+                                    <circle cx="130" cy="130" r="120" class="focus-ring-bg" />
+                                    <circle cx="130" cy="130" r="120" id="focusTimerCircle"
+                                        class="focus-ring-progress" />
+                                </svg>
+                                <div class="acad-focus__display" id="focusTimerDisplay">25:00</div>
+                            </div>
+                            <div class="acad-focus__controls">
+                                <select id="focusTimerSubject" class="acad-select subject-select">
+                                    <option value="">No Subject</option>
+                                </select>
+                                <div class="acad-focus__dur">
+                                    <label><i class="fa-regular fa-clock"></i> Minutes</label>
+                                    <input type="number" id="focusTimerDuration" value="25" min="1" max="120"
+                                        class="acad-select" style="width:64px;text-align:center">
+                                </div>
+                                <div class="acad-focus__btns">
+                                    <button id="focusTimerStart" class="acad-btn acad-btn--start"><i
+                                            class="fa-solid fa-play"></i> Start</button>
+                                    <button id="focusTimerPause" class="acad-btn acad-btn--pause"
+                                        style="display:none"><i class="fa-solid fa-pause"></i> Pause</button>
+                                    <button id="focusTimerReset" class="acad-btn acad-btn--reset"><i
+                                            class="fa-solid fa-rotate-left"></i> Reset</button>
+                                </div>
+                                <div class="acad-focus__stats" id="focusWeeklyStats">
+                                    <i class="fa-solid fa-chart-simple"></i> 0h 0m this week &bull; 0 sessions
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exam Countdown -->
+                    <div class="acad-card">
+                        <div class="acad-card__head">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <span>Exam Countdown</span>
+                        </div>
+                        <div class="acad-exam-form">
+                            <input type="text" id="examNameInput" placeholder="Exam name..." class="acad-select"
+                                style="flex:2">
+                            <select id="examSubjectSelect" class="acad-select subject-select" style="flex:1">
+                                <option value="" disabled selected>Subject</option>
+                            </select>
+                            <input type="date" id="examDateInput" class="acad-select" style="flex:1">
+                            <button id="addExamBtn" class="acad-btn acad-btn--start" style="padding:8px 16px"><i
+                                    class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                        <p id="examDateGuide" class="acad-exam-guide"><i class="fa-regular fa-circle-question"></i>
+                            Select an exam date to see countdown.</p>
+                        <div id="examList" class="exam-list"></div>
+                    </div>
+
+                    <!-- Weekly Study Planner -->
+                    <div class="acad-card">
+                        <div class="acad-card__head">
+                            <i class="fa-solid fa-calendar-week"></i>
+                            <span>Weekly Study Planner</span>
+                        </div>
+                        <button id="mobileAddStudyPlanBtn" class="mobile-add-study-btn"><i class="fa-solid fa-plus"></i>
+                            Add Study Plan</button>
+                        <div id="studyPlannerGrid" class="study-planner-grid"></div>
+                    </div>
+                </div><!-- /#academics-tab -->
+
+                <!-- Analytics Tab (6th slide) -->
+                <div class="tab-content" id="analytics-tab">
+                    <div id="analyticsSection" class="ana-section">
+                        <div class="ana-header">
+                            <div class="ana-header__title">
+                                <span>Smart Analytics</span>
+                            </div>
+                            <span class="ana-header__sub">AI-driven insights for your productivity</span>
+                        </div>
+
+                        <!-- Growth Score with Skeleton -->
+                        <div id="growth-score-container">
+                            <div class="skeleton-analytics">
+                                <div class="skeleton skeleton-text--title"></div>
+                                <div class="skeleton skeleton-analytics__chart"></div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Card with Skeleton -->
+                        <div id="performanceCardContainer">
+                            <div class="skeleton-analytics">
+                                <div class="skeleton skeleton-text--title"></div>
+                                <div class="skeleton-analytics__stats">
+                                    <div class="skeleton-analytics__stat">
+                                        <div class="skeleton skeleton-text"></div>
+                                        <div class="skeleton skeleton-text" style="height: 32px; margin-top: 8px;"></div>
+                                    </div>
+                                    <div class="skeleton-analytics__stat">
+                                        <div class="skeleton skeleton-text"></div>
+                                        <div class="skeleton skeleton-text" style="height: 32px; margin-top: 8px;"></div>
+                                    </div>
+                                    <div class="skeleton-analytics__stat">
+                                        <div class="skeleton skeleton-text"></div>
+                                        <div class="skeleton skeleton-text" style="height: 32px; margin-top: 8px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="scoreCardContainer"></div>
+                        <div id="studyHoursContainer"></div>
+                        <div id="insightsContainer"></div>
+                        
+                        <!-- Focus Blocker Analytics -->
+                        <div id="focusBlockerAnalyticsContainer" class="analytics-card" style="margin-top: 24px;">
+                            <div class="card-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                <div>
+                                    <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 8px;">
+                                        <i class="fa-solid fa-shield-halved" style="color: var(--accent-color);"></i>
+                                        Focus Blocker Stats
+                                    </h3>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0 0;">Your distraction blocking performance</p>
+                                </div>
+                                <button id="focusBlockerAnalyticsRefresh" style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 12px;">
+                                    <i class="fa-solid fa-rotate"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Summary Stats -->
+                            <div id="focusBlockerSummary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <!-- Charts -->
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                                <!-- Focus Score Trend -->
+                                <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px;">
+                                    <h4 style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 12px 0;">Focus Score Trend</h4>
+                                    <canvas id="focusScoreChart" height="200"></canvas>
+                                </div>
+
+                                <!-- Blocked Attempts Over Time -->
+                                <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px;">
+                                    <h4 style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 12px 0;">Distraction Attempts</h4>
+                                    <canvas id="blockedAttemptsChart" height="200"></canvas>
+                                </div>
+
+                                <!-- Most Blocked Items -->
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                    <!-- Top Websites -->
+                                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px;">
+                                        <h4 style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-solid fa-globe" style="font-size: 12px; opacity: 0.7;"></i>
+                                            Top Blocked Websites
+                                        </h4>
+                                        <div id="topBlockedWebsites" style="display: flex; flex-direction: column; gap: 8px;">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Top Apps -->
+                                    <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px;">
+                                        <h4 style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-brands fa-android" style="font-size: 12px; opacity: 0.7;"></i>
+                                            Top Blocked Apps
+                                        </h4>
+                                        <div id="topBlockedApps" style="display: flex; flex-direction: column; gap: 8px;">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /#analytics-tab -->
+
+                <!-- Notes Tab -->
+                <div class="tab-content" id="notes-tab">
+                    <div class="notes-header">
+                        <h2 class="notes-header__title">Notes & Reflections</h2>
+                        <p class="notes-header__sub">Write study notes and daily reflections</p>
+                    </div>
+
+                    <!-- Search and Filter Bar -->
+                    <div class="notes-search-bar">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="notesSearchInput" placeholder="Search notes by title, content, or tags..." class="notes-search-input">
+                    </div>
+
+                    <!-- Tag Filter -->
+                    <div class="notes-tag-filter" id="notesTagFilter" style="display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0;">
+                        <button class="tag-filter-btn active" data-tag="all">All</button>
+                    </div>
+
+                    <!-- Add Note Section -->
+                    <div class="input-section collapsed" id="addNoteSection">
+                        <button id="addNoteBtn" class="add-note-btn">
+                            <i class="fa-solid fa-plus"></i> Create New Note
+                        </button>
+
+                        <div id="noteForm" style="display: none;">
+                            <div class="note-form-group">
+                                <label for="noteTitleInput">Title</label>
+                                <input type="text" id="noteTitleInput" placeholder="Enter note title..." class="note-input">
+                            </div>
+                            
+                            <div class="note-form-group">
+                                <label for="noteSubjectSelect">Subject (Optional)</label>
+                                <select id="noteSubjectSelect" class="note-select">
+                                    <option value="">No Subject</option>
+                                </select>
+                            </div>
+
+                            <div class="note-form-group">
+                                <label for="noteTagsInput">Tags (comma-separated)</label>
+                                <input type="text" id="noteTagsInput" placeholder="e.g. reflection, study, important" class="note-input">
+                                <small style="color: var(--text-secondary); font-size: 12px; margin-top: 4px; display: block;">Suggested: reflection, study, personal, todo, important</small>
+                            </div>
+
+                            <div class="note-form-group">
+                                <label for="noteContentInput">Content</label>
+                                <textarea id="noteContentInput" placeholder="Write your note or reflection here..." rows="8" class="note-textarea"></textarea>
+                            </div>
+
+                            <div class="note-form-actions">
+                                <button id="cancelNoteBtn" class="cancel-note-btn">Cancel</button>
+                                <button id="saveNoteBtn" class="save-note-btn">
+                                    <i class="fa-solid fa-check"></i> Save Note
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes List -->
+                    <div id="notesList" class="notes-grid"></div>
+
+                    <!-- Empty State -->
+                    <div id="notesEmptyState" class="empty-state">
+                        <div class="empty-state__icon">📝</div>
+                        <p class="empty-state__title">No notes yet</p>
+                        <p class="empty-state__subtitle">Start writing your first study note</p>
+                    </div>
+                </div><!-- /#notes-tab -->
+
+                <!-- Calendar Tab -->
+                <div class="tab-content" id="calendar-tab">
+                    <div class="calendar-container">
+                        <!-- Calendar Header -->
+                        <div class="calendar-header" id="calendarHeader">
+                            <div class="calendar-header-top">
+                                <div class="calendar-title-section">
+                                    <h2 class="calendar-title">Calendar</h2>
+                                    <div class="calendar-current-month" id="calendarCurrentMonth">January 2026</div>
+                                </div>
+                                
+                                <!-- View Toggle -->
+                                <div class="calendar-view-toggle" id="calendarViewToggle">
+                                    <button class="calendar-view-btn active" data-view="month">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <span class="btn-text">Month</span>
+                                    </button>
+                                    <button class="calendar-view-btn" data-view="week">
+                                        <i class="fa-solid fa-calendar-week"></i>
+                                        <span class="btn-text">Week</span>
+                                    </button>
+                                    <button class="calendar-view-btn" data-view="day">
+                                        <i class="fa-solid fa-calendar-day"></i>
+                                        <span class="btn-text">Day</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Calendar Controls -->
+                            <div class="calendar-controls">
+                                <button class="calendar-nav-btn" id="calendarPrevBtn">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <button class="calendar-today-btn" id="calendarTodayBtn">Today</button>
+                                <button class="calendar-nav-btn" id="calendarNextBtn">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                                
+                                <!-- Heatmap Toggle -->
+                                <div class="calendar-heatmap-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="calendarHeatmapToggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Heatmap</span>
+                                </div>
+                                
+                                <!-- Google Calendar Sync -->
+                                <button class="calendar-today-btn" id="googleCalendarBtn" style="margin-left: 8px;">
+                                    <i class="fa-brands fa-google"></i> Connect Google
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Calendar Grid -->
+                        <div class="calendar-grid" id="calendarGrid">
+                            <!-- Calendar content will be rendered here -->
+                        </div>
+                        
+                        <!-- Legend -->
+                        <div class="calendar-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot recommended"></div>
+                                <span>AI Recommended</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot exam"></div>
+                                <span>Exams</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot task"></div>
+                                <span>Tasks</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot focus"></div>
+                                <span>Focus</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot habit"></div>
+                                <span>Habits</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot google"></div>
+                                <span>Google Calendar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /#calendar-tab -->
+
+                <!-- AI Coach Tab -->
+                <div class="tab-content" id="ai-coach-tab">
+                    <div class="ai-coach-container">
+                        <div class="ai-coach-page-header">
+                            <h2 class="ai-coach-page-title">AI Study Coach</h2>
+                            <p class="ai-coach-page-subtitle">Personalized insights and recommendations for better learning</p>
+                        </div>
+                        <div id="aiCoachDashboard"></div>
+                    </div>
+                </div><!-- /#ai-coach-tab -->
+
+                <!-- Settings Tab (Previously Profile Modal) -->
+                <div class="tab-content" id="settings-tab">
+                    <div class="settings-header-bar">
+                        <button id="closeProfileBtn" class="settings-back-btn" aria-label="Back">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h2 class="settings-title">Profile & Settings</h2>
+                    </div>
+            <div class="profile-header">
+                <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
+                <span id="profileLevelBadge" class="profile-level-badge">Lv. 1</span>
+                <div class="profile-name-container">
+                    <h2 id="profileNameText">Username</h2>
+                    <input type="text" id="profileNameInput" class="profile-name-input" style="display: none;"
+                        placeholder="Enter Username">
+                    <button class="edit-profile-btn" id="editProfileNameBtn" title="Edit Username">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </div>
+                <div id="profileNameActions" class="profile-name-actions" style="display: none;">
+                    <button id="saveProfileNameBtn" class="auth-btn secondary-btn sync-btn-small"
+                        style="background-color: var(--accent-color); color: white; border: none; padding: 6px 16px !important; font-size: 13px !important; min-height: 32px !important; height: 32px !important; line-height: 1 !important; border-radius: 6px !important; width: 80px !important; margin: 0 !important; font-weight: 500 !important; flex: 0 0 auto !important;">Save</button>
+                    <button id="cancelProfileNameBtn" class="auth-btn secondary-btn sync-btn-small"
+                        style="padding: 6px 16px !important; font-size: 13px !important; min-height: 32px !important; height: 32px !important; line-height: 1 !important; border-radius: 6px !important; width: 80px !important; margin: 0 !important; font-weight: 500 !important; flex: 0 0 auto !important;">Cancel</button>
+                </div>
+                <p id="profileEmail" class="profile-email">Loading email...</p>
+            </div>
+
+            <div class="profile-stats">
+                <div class="profile-stat-card">
+                    <h3 id="profileTotalTasks">0</h3>
+                    <p>Tasks Created</p>
+                </div>
+                <div class="profile-stat-card">
+                    <h3 id="profileCompletedTasks" style="color: #22c55e;">0</h3>
+                    <p>Tasks Completed</p>
+                </div>
+                <div class="profile-stat-card">
+                    <h3 id="profileCompletionRate" style="color: var(--accent-color);">0%</h3>
+                    <p>Completion Rate</p>
+                </div>
+            </div>
+
+            <!-- Sync Status Quick View - Prominent Card -->
+            <div style="margin: 16px; padding: 16px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%); border-radius: 12px; border: 1.5px solid var(--accent-color); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fa-solid fa-cloud" style="font-size: 18px; color: var(--accent-color);"></i>
+                    <div>
+                        <div style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px;">Cloud Sync Status</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);" id="settingsSyncStatusText">All data synced</div>
+                    </div>
+                </div>
+                <div id="settingsSyncStatusIndicator" class="sync-status-icon synced" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+            </div>
+
+            <!-- XP & Level Card -->
+            <div class="premium-card xp-level-card">
+                <div class="xp-level-header">
+                    <div class="xp-info">
+                        <span class="xp-label">Total XP</span>
+                        <span class="xp-value" id="profileXPValue">0</span>
+                    </div>
+                    <div class="level-info">
+                        <span class="level-label" id="profileLevelLabel">Level 1</span>
+                        <span class="level-value" id="profileLevelValue">1</span>
+                    </div>
+                </div>
+                <div class="level-progress">
+                    <div class="level-progress-bar">
+                        <div class="level-progress-fill" id="levelProgressFill"></div>
+                    </div>
+                    <span class="level-progress-text" id="levelProgressText">0 / 100 XP</span>
+                </div>
+            </div>
+
+            <div class="profile-chart-section">
+                <h3>This Week Overview</h3>
+                <div class="stats-toggle">
+                    <button class="stats-tab-btn active" data-stat-type="tasks">Tasks</button>
+                    <button class="stats-tab-btn" data-stat-type="habits">Habits</button>
+                </div>
+                <div class="profile-chart-container">
+                    <canvas id="profileChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Academic Analytics -->
+            <div class="profile-settings-section" style="padding-top: 5px;">
+                <h3
+                    style="font-size: 14px; text-transform: uppercase; color: var(--text-color); opacity: 0.6; margin-bottom: 8px; margin-left: 5px; font-weight: 600;">
+                    Academic Insights</h3>
+                <div id="academicAnalytics" class="academic-analytics-container"></div>
+            </div>
+
+            <!-- Smart Insights Section -->
+            <div class="smart-insights-section" id="smartInsightsSection">
+                <h3 class="smart-insights-title">Smart Insights</h3>
+                <div id="smartInsightsList"></div>
+            </div>
+
+            <div class="profile-settings-section" style="padding-top: 5px;">
+                <h3 class="toggle-section-header" id="accountSectionHeader"
+                    style="font-size: 14px; text-transform: uppercase; color: var(--text-color); opacity: 0.6; margin-bottom: 8px; margin-left: 5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+                    <span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-user-gear"></i>
+                        Account</span>
+                    <i class="fa-solid fa-chevron-down chevron-icon"
+                        style="font-size: 12px; transition: transform 0.2s;"></i>
+                </h3>
+
+                <div class="settings-card toggle-section-content" id="accountSectionContent" style="display: none;">
+                    <!-- Change Password Section -->
+                    <div id="changePasswordGroup" style="display: none; flex-direction: column;">
+                        <div class="settings-row" id="togglePasswordSectionBtn" style="width: 100%; cursor: pointer;">
+                            <span
+                                style="cursor: pointer; width: 100%; margin: 0; display: flex; align-items: center; gap: 12px;">
+                                <i class="fa-solid fa-key" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                                <span style="font-size: 15px; font-weight: 500;">Change Password</span>
+                                <i class="fa-solid fa-chevron-right chevron-icon"
+                                    style="margin-left: auto; font-size: 12px; opacity: 0.5; transition: transform 0.3s ease;"></i>
+                            </span>
+                        </div>
+                        <div id="changePasswordContainer" class="change-password-container collapsed">
+                            <div class="auth-input-group" style="padding: 12px 16px 20px 16px;">
+
+                                <div class="password-wrapper" style="margin-bottom: 16px;">
+                                    <input type="password" id="currentPasswordInput" placeholder="Current Password"
+                                        style="height: 44px; margin-bottom: 0; font-size: 14px;">
+                                    <button type="button" class="password-toggle-btn toggle-current-btn"
+                                        aria-label="Show password">
+                                        <svg class="eye-icon-svg" xmlns="http://www.w3.org/2000/svg" width="20"
+                                            height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="password-wrapper" style="margin-bottom: 16px;">
+                                    <input type="password" id="newPasswordInput" placeholder="New Password"
+                                        style="height: 44px; margin-bottom: 0; font-size: 14px;">
+                                    <button type="button" class="password-toggle-btn toggle-new-btn"
+                                        aria-label="Show password">
+                                        <svg class="eye-icon-svg" xmlns="http://www.w3.org/2000/svg" width="20"
+                                            height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="password-wrapper" style="margin-bottom: 16px;">
+                                    <input type="password" id="confirmPasswordInput" placeholder="Confirm New Password"
+                                        style="height: 44px; margin-bottom: 0; font-size: 14px;">
+                                </div>
+
+                                <p id="passwordChangeError" class="auth-error"
+                                    style="display: none; margin-bottom: 16px; margin-top: -8px; font-size: 13px; text-align: left;">
+                                </p>
+                                <p id="passwordChangeSuccess"
+                                    style="display: none; color: #10B981; font-weight: 500; font-size: 13px; text-align: center; margin-bottom: 16px; margin-top: -8px;">
+                                </p>
+
+                                <div class="modal-actions"
+                                    style="margin-top: 5px; margin-bottom: 0; gap: 12px; display: flex;">
+                                    <button id="cancelPasswordBtn" class="auth-btn secondary-btn"
+                                        style="margin: 0; height: 44px; flex: 1;">Cancel</button>
+                                    <button id="savePasswordBtn" class="auth-btn"
+                                        style="margin: 0; height: 44px; flex: 1;">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-divider" style="margin: 8px 16px;"></div>
+
+                    <!-- Cloud Backup & Sync Section -->
+                    <div class="settings-row" id="toggleBackupSectionBtn" style="cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0; cursor: pointer; width: 100%;">
+                            <i class="fa-solid fa-cloud-arrow-up" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Cloud Backup & Sync</span>
+                            <i class="fa-solid fa-chevron-right chevron-icon"
+                                style="margin-left: auto; font-size: 12px; opacity: 0.5; transition: transform 0.3s ease;"></i>
+                        </span>
+                    </div>
+
+                    <!-- Backup & Sync Content (Hidden by default) -->
+                    <div id="backupSectionContent" style="display: none; padding: 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                        <!-- Sync Status Card -->
+                        <div style="background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border-color);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                                <span style="font-size: 13px; color: var(--text-secondary); font-weight: 500;">SYNC STATUS</span>
+                                <div id="backupSyncStatusIndicator" class="sync-status-icon synced">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                <i class="fa-solid fa-clock" style="font-size: 12px; opacity: 0.5;"></i>
+                                <span style="font-size: 13px; color: var(--text-secondary);">Last Backup:</span>
+                            </div>
+                            <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-left: 20px;" id="lastBackupTime">Never</div>
+                        </div>
+
+                        <!-- Backup Actions -->
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button id="backupNowBtn" class="backup-action-btn" style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; width: 100%;">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>Backup Now</span>
+                            </button>
+
+                            <button id="restoreDataBtn" class="backup-action-btn" style="background: var(--card-bg); color: var(--text-primary); border: 2px solid var(--border-color); padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; width: 100%;">
+                                <i class="fa-solid fa-cloud-arrow-down"></i>
+                                <span>Restore Data</span>
+                            </button>
+
+                            <button id="forceSyncBtn" class="backup-action-btn" style="background: var(--card-bg); color: var(--text-primary); border: 2px solid var(--border-color); padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; width: 100%;">
+                                <i class="fa-solid fa-rotate"></i>
+                                <span>Sync Now</span>
+                            </button>
+                        </div>
+
+                        <!-- Info Text -->
+                        <div style="margin-top: 16px; padding: 12px; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border-left: 3px solid var(--accent-color);">
+                            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                                <i class="fa-solid fa-circle-info" style="margin-right: 6px; color: var(--accent-color);"></i>
+                                Your data is automatically synced to the cloud. You can manually backup all data at any time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="toggle-section-header" id="appPrefsSectionHeader"
+                    style="font-size: 14px; text-transform: uppercase; color: var(--text-color); opacity: 0.6; margin-top: 24px; margin-bottom: 8px; margin-left: 5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+                    <span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-sliders"></i> App
+                        Preferences</span>
+                    <i class="fa-solid fa-chevron-down chevron-icon"
+                        style="font-size: 12px; transition: transform 0.2s;"></i>
+                </h3>
+                <div class="settings-card toggle-section-content" id="appPrefsSectionContent" style="display: none;">
+
+                    <!-- Avatar Collapsible Row -->
+                    <div class="settings-row" id="toggleAvatarSectionBtn" style="cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0; cursor: pointer; width: 100%;">
+                            <i class="fa-solid fa-circle-user"
+                                style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Avatar</span>
+                            <i class="fa-solid fa-chevron-right chevron-icon"
+                                style="margin-left: auto; font-size: 12px; opacity: 0.5; transition: transform 0.3s ease;"></i>
+                        </span>
+                    </div>
+
+                    <!-- Avatar Content (Hidden by default) -->
+                    <div id="avatarSectionContent"
+                        style="display: none; padding: 0 16px 16px 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                        <div class="avatar-picker-inline" id="avatarPicker">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="settings-divider" style="margin: 8px 16px;"></div>
+
+                    <!-- Accent Color Collapsible Row -->
+                    <div class="settings-row" id="toggleAccentSectionBtn" style="cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0; cursor: pointer; width: 100%;">
+                            <i class="fa-solid fa-palette" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Accent Color</span>
+                            <i class="fa-solid fa-chevron-right chevron-icon"
+                                style="margin-left: auto; font-size: 12px; opacity: 0.5; transition: transform 0.3s ease;"></i>
+                        </span>
+                    </div>
+
+                    <!-- Accent Color Content (Hidden by default) -->
+                    <div id="accentSectionContent"
+                        style="display: none; padding: 12px 16px 16px 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                        <!-- Preset Colors -->
+                        <div class="accent-color-picker" id="accentColorPicker">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <!-- Custom Color Picker -->
+                        <div class="accent-custom-section">
+                            <label class="accent-custom-label"><i class="fa-solid fa-eyedropper"
+                                    style="margin-right: 6px; opacity: 0.6;"></i>Custom Color</label>
+                            <div class="accent-custom-row">
+                                <div class="accent-custom-input-wrap">
+                                    <input type="color" id="customColorInput">
+                                </div>
+                                <input type="text" id="customHexInput" placeholder="#HEX" class="accent-hex-input">
+                                <button id="customColorOkBtn" class="accent-ok-btn"><i class="fa-solid fa-check"
+                                        style="margin-right: 4px;"></i>Apply</button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Colors -->
+                        <div class="accent-recent-section" id="recentColorsSection">
+                            <label class="accent-custom-label"><i class="fa-solid fa-clock-rotate-left"
+                                    style="margin-right: 6px; opacity: 0.6;"></i>Recent</label>
+                            <div class="accent-color-picker" id="recentColorsContainer">
+                                <!-- Recent colors populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-divider" style="margin: 8px 16px;"></div>
+
+                    <div class="settings-row no-chevron" style="padding-top: 14px; padding-bottom: 14px;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0;">
+                            <i class="fa-solid fa-bell" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Notifications</span>
+                        </span>
+                        <div class="settings-checkbox" id="notifToggleBtn">
+                            <i class="fa-solid fa-check checkbox-tick"></i>
+                        </div>
+                    </div>
+
+                    <div class="settings-divider" style="margin: 8px 16px;"></div>
+
+                    <div class="settings-row no-chevron" style="padding-top: 14px; padding-bottom: 14px;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0;">
+                            <i class="fa-solid fa-moon" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Dark Mode</span>
+                        </span>
+                        <div class="settings-checkbox" id="profileThemeToggleBtn">
+                            <i class="fa-solid fa-check checkbox-tick"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Focus Blocker Section -->
+                <h3 class="toggle-section-header" id="focusBlockerSectionHeader"
+                    style="font-size: 14px; text-transform: uppercase; color: var(--text-color); opacity: 0.6; margin-top: 24px; margin-bottom: 8px; margin-left: 5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none;">
+                    <span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Focus Blocker</span>
+                    <i class="fa-solid fa-chevron-down chevron-icon" style="font-size: 12px; transition: transform 0.2s;"></i>
+                </h3>
+                <div class="settings-card toggle-section-content" id="focusBlockerSectionContent" style="display: none;">
+                    
+                    <!-- Service Status Card -->
+                    <div style="background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="font-size: 13px; color: var(--text-secondary); font-weight: 500;">SERVICE STATUS</span>
+                            <div id="focusBlockerStatusIndicator" class="sync-status-icon" style="background: #94a3b8;">
+                                <i class="fa-solid fa-question"></i>
+                            </div>
+                        </div>
+                        <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;" id="focusBlockerStatusText">Checking...</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;" id="focusBlockerStatusDesc">Verifying accessibility service status</div>
+                    </div>
+
+                    <!-- Setup Button -->
+                    <button id="enableAccessibilityBtn" class="backup-action-btn" style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; width: 100%; margin-bottom: 16px; display: none;">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Enable Accessibility Service</span>
+                    </button>
+
+                    <div class="settings-divider" style="margin: 16px 0;"></div>
+
+                    <!-- Website Blocklist -->
+                    <div class="settings-row" id="toggleWebsiteBlocklistBtn" style="cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0; cursor: pointer; width: 100%;">
+                            <i class="fa-solid fa-globe" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Blocked Websites</span>
+                            <span id="websiteBlocklistCount" style="margin-left: auto; font-size: 13px; color: var(--text-secondary); font-weight: 600; margin-right: 8px;">0</span>
+                            <i class="fa-solid fa-chevron-right chevron-icon" style="font-size: 12px; opacity: 0.5; transition: transform 0.3s ease;"></i>
+                        </span>
+                    </div>
+
+                    <div id="websiteBlocklistContent" style="display: none; padding: 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <input type="text" id="addWebsiteInput" placeholder="e.g., youtube.com" style="flex: 1; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px; background: var(--card-bg); color: var(--text-primary);">
+                            <button id="addWebsiteBtn" style="background: var(--accent-color); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div id="websiteBlocklist" style="display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="settings-divider" style="margin: 8px 16px;"></div>
+
+                    <!-- App Blocklist (Android Only) -->
+                    <div class="settings-row" id="toggleAppBlocklistBtn" style="cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 12px; margin: 0; cursor: pointer; width: 100%;">
+                            <i class="fa-brands fa-android" style="opacity: 0.7; width: 16px; text-align: center;"></i>
+                            <span style="font-size: 15px; font-weight: 500;">Blocked Apps</span>
+                            <span id="appBlocklistCount" style="margin-left: auto; font-size: 13px; color: var(--text-secondary); font-weight: 600; margin-right: 8px;">0</span>
+                            <i class="fa-solid fa-chevron-right chevron-icon" style="font-size: 12px; opacity: 0.5; transition: transform 0.3s ease;"></i>
+                        </span>
+                    </div>
+
+                    <div id="appBlocklistContent" style="display: none; padding: 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <input type="text" id="addAppInput" placeholder="e.g., com.instagram.android" style="flex: 1; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px; background: var(--card-bg); color: var(--text-primary);">
+                            <button id="addAppBtn" style="background: var(--accent-color); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <button id="browseInstalledAppsBtn" style="background: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-color); padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fa-solid fa-list"></i> Browse Installed Apps
+                        </button>
+                        <div id="appBlocklist" style="display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="settings-divider" style="margin: 8px 16px;"></div>
+
+                    <!-- Stats Summary -->
+                    <div style="padding: 16px;">
+                        <div style="font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-bottom: 12px;">BLOCKING STATS</div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                            <div style="background: var(--card-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                <div style="font-size: 20px; font-weight: 700; color: var(--accent-color);" id="focusBlockerTotalBlocked">0</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Total Blocked</div>
+                            </div>
+                            <div style="background: var(--card-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                <div style="font-size: 20px; font-weight: 700; color: #22c55e;" id="focusBlockerAvgScore">100</div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Avg Focus Score</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div style="margin: 0 16px 16px 16px; padding: 12px; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border-left: 3px solid var(--accent-color);">
+                        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                            <i class="fa-solid fa-circle-info" style="margin-right: 6px; color: var(--accent-color);"></i>
+                            Focus Blocker prevents access to distracting websites and apps during focus sessions. Enable the accessibility service on Android for app blocking.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="settings-card" id="logoutBtn"
+                    style="margin-top: 24px; border: 1px solid rgba(239, 68, 68, 0.4); background: transparent; cursor: pointer; border-radius: 12px; transition: all 0.2s ease;">
+                    <div class="settings-row no-chevron"
+                        style="padding-top: 14px; padding-bottom: 14px; justify-content: center; background: transparent;">
+                        <span
+                            style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; cursor: pointer;">
+                            <i class="fa-solid fa-right-from-bracket" style="color: #ef4444; font-size: 15px;"></i>
+                            <span style="color: #ef4444; font-weight: 600; font-size: 16px;">Log Out</span>
+                        </span>
+                    </div>
+                </div>
+            </div><!-- /.profile-settings-section -->
+
+                </div><!-- /#settings-tab -->
+
+            </div><!-- /.tabs-track -->
+        </div><!-- /.tabs-wrapper -->
+
+    </div><!-- /#appContainer -->
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h3>Delete Item?</h3>
+            <p>Are you sure you want to delete this?</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="auth-btn secondary-btn" style="margin-bottom: 0;">Cancel</button>
+                <button id="confirmDeleteBtn" class="auth-btn"
+                    style="margin-bottom: 0; background-color: #ef4444; border-color: #ef4444;">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Block Modal -->
+    <div id="studyBlockModal" class="modal-overlay" style="display:none;">
+        <div class="modal-box" style="max-width:340px">
+            <h3>Add Study Block</h3>
+            <input type="hidden" id="studyBlockDay">
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+                <!-- Day selector for mobile -->
+                <div id="studyBlockDaySelector" class="study-day-selector">
+                    <label style="font-size:14px;font-weight:600;margin-bottom:4px;display:block;">Select Day</label>
+                    <div class="day-chips">
+                        <button type="button" class="day-chip" data-day="Mon">Mon</button>
+                        <button type="button" class="day-chip" data-day="Tue">Tue</button>
+                        <button type="button" class="day-chip" data-day="Wed">Wed</button>
+                        <button type="button" class="day-chip" data-day="Thu">Thu</button>
+                        <button type="button" class="day-chip" data-day="Fri">Fri</button>
+                        <button type="button" class="day-chip" data-day="Sat">Sat</button>
+                        <button type="button" class="day-chip" data-day="Sun">Sun</button>
+                    </div>
+                </div>
+                <select id="studyBlockSubject" class="priority-select subject-select">
+                    <option value="">General</option>
+                </select>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <label style="font-size:14px">Start Time:</label>
+                    <input type="time" id="studyBlockStartTime" class="priority-select"
+                        style="width:120px;text-align:center">
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <label style="font-size:14px">Duration (min):</label>
+                    <input type="number" id="studyBlockDuration" value="30" min="5" max="240" class="priority-select"
+                        style="width:70px;text-align:center">
+                </div>
+            </div>
+            <div class="modal-actions" style="margin-top:16px">
+                <button id="cancelStudyBlock" class="auth-btn secondary-btn" style="margin:0">Cancel</button>
+                <button id="saveStudyBlock" class="auth-btn" style="margin:0">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crop Modal -->
+    <div id="cropModal" class="modal-overlay" style="display: none; z-index: 9999;">
+        <div class="modal-box" style="width: 90%; max-width: 400px; padding: 20px;">
+            <h3 style="margin-bottom: 15px;">Adjust Profile Photo</h3>
+            <div
+                style="width: 100%; height: 300px; background: #000; border-radius: 8px; overflow: hidden; position: relative;">
+                <img id="cropImage" src="" style="max-width: 100%; display: block;">
+            </div>
+            <div class="modal-actions" style="margin-top: 20px;">
+                <button id="cancelCropBtn" class="auth-btn secondary-btn" style="margin: 0;">Cancel</button>
+                <button id="confirmCropBtn" class="auth-btn" style="margin: 0;">Save Photo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAB Quick Actions -->
+    <div class="fab-backdrop" id="fabBackdrop"></div>
+    <div class="fab-container" id="fabContainer" style="display: none;">
+        <div class="fab-menu" id="fabMenu">
+            <div class="fab-menu-item" data-action="ai-coach">
+                <button class="fab-menu-btn"><i class="fa-solid fa-robot"></i></button>
+                <span class="fab-menu-label">AI Coach</span>
+            </div>
+            <div class="fab-menu-item" data-action="add-task">
+                <button class="fab-menu-btn"><i class="fa-solid fa-list-check"></i></button>
+                <span class="fab-menu-label">New Task</span>
+            </div>
+            <div class="fab-menu-item" data-action="add-habit">
+                <button class="fab-menu-btn"><i class="fa-solid fa-seedling"></i></button>
+                <span class="fab-menu-label">New Habit</span>
+            </div>
+            <div class="fab-menu-item" data-action="add-note">
+                <button class="fab-menu-btn"><i class="fa-solid fa-note-sticky"></i></button>
+                <span class="fab-menu-label">New Note</span>
+            </div>
+            <div class="fab-menu-item" data-action="focus">
+                <button class="fab-menu-btn"><i class="fa-solid fa-crosshairs"></i></button>
+                <span class="fab-menu-label">Focus Timer</span>
+            </div>
+        </div>
+        <button class="fab-main" id="fabMainBtn" aria-label="Quick Actions">
+            <i class="fa-solid fa-plus fab-icon"></i>
+        </button>
+    </div>
+
+    <!-- Calendar Event Modal -->
+    <div class="calendar-modal" id="calendarEventModal">
+        <div class="calendar-modal-content" id="calendarEventModalContent">
+            <!-- Event details will be rendered here by JavaScript -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <!-- Cropper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.js"></script>
+    <!-- Firebase SDK (v10 with proper compat handling) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Dexie.js - IndexedDB Wrapper -->
+    <script src="https://unpkg.com/dexie@4.0.1/dist/dexie.min.js"></script>
+    
+    <!-- IndexedDB Offline-First Database Layer (PHASE 1: CRITICAL) -->
+    <script src="js/core/indexedDB.js?v=1"></script>
+    <script src="js/core/indexedDB-adapter.js?v=1"></script>
+    
+    <!-- Startup Manager (PHASE 1-3 ORCHESTRATION) -->
+    <script src="js/core/startupManager.js"></script>
+    <script src="js/core/clearCache.js"></script>
+    
+    <!-- Core Systems (PHASE 1: CRITICAL FOR UI) -->
+    <script src="js/core/notifications.js?v=1"></script>
+    <script src="js/core/firebase-config.js?v=4"></script>
+    <script src="js/core/skeletonLoader.js"></script>
+    <script src="js/core/hapticFeedback.js"></script>
+    <script src="js/core/premiumInteractions.js"></script>
+    <script src="js/core/backupSync.js?v=1"></script>
+    <script src="js/core/auth.js?v=6"></script>
+    <script src="js/core/data.js?v=4"></script>
+    <script src="js/tasks/taskUtils.js?v=1"></script>
+    <script src="js/core/ui.js?v=9"></script>
+    <script src="js/core/tabManager.js?v=2"></script>
+    
+    <!-- Background Synchronization System (PHASE 2: DELAYED) -->
+    <!-- These load after UI is visible (managed by StartupManager) -->
+    <script src="js/sync/networkMonitor.js?v=2" defer></script>
+    <script src="js/sync/firestoreSyncAdapter.js?v=1" defer></script>
+    <script src="js/sync/syncQueueProcessor.js?v=1" defer></script>
+    <script src="js/sync/syncManager.js?v=2" defer></script>
+    <script src="js/sync/backgroundTaskRunner.js?v=1" defer></script>
+    <script src="js/sync/serviceWorkerRegistration.js?v=2" defer></script>
+    <script src="js/sync/syncStatusUI.js?v=2" defer></script>
+    
+    <!-- Cross-Device Optimization (PHASE 2: DELAYED) -->
+    <script src="js/sync/deviceManager.js" defer></script>
+    <script src="js/sync/conflictResolver.js" defer></script>
+    <script src="js/sync/deviceOptimizationEngine.js" defer></script>
+    
+    <!-- Essential App Features (Load after core) -->
+    <script src="js/core/pushNotifications.js?v=1"></script>
+    <script src="js/core/localNotifications.js?v=1"></script>
+    <script src="js/focus/focusLockMode.js?v=1"></script>
+    <script src="js/focus/focusBlocker.js?v=2"></script>
+    <script src="js/academic/academic.js?v=4"></script>
+
+    <!-- Notes -->
+    <script src="js/notes/notes.js?v=1"></script>
+
+    <!-- Dashboard (Load early for home screen) -->
+    <script src="js/dashboard/smartStudyPlanner.js?v=1"></script>
+    <script src="js/dashboard/todayDashboard.js?v=1"></script>
+
+    <!-- Gamification (Load early for engagement) -->
+    <script src="js/gamification/xpSystem.js?v=2"></script>
+    <script src="js/gamification/levelSystem.js?v=1"></script>
+    <script src="js/gamification/badges.js?v=2"></script>
+
+    <!-- Settings -->
+    <script src="js/settings/themes.js?v=3"></script>
+    <script src="js/settings/avatar.js?v=3"></script>
+    <script src="js/settings/focusBlockerUI.js?v=3"></script>
+
+    <!-- PHASE 3: LAZY-LOADED SYSTEMS -->
+    <!-- These are loaded on-demand when tabs are opened -->
+    
+    <!-- Calendar (Lazy: Load when calendar tab is opened) -->
+    <script src="js/calendar/calendar.js?v=1" defer></script>
+
+    <!-- Smart Study Scheduler (Lazy: Load when academics tab is opened) -->
+    <script src="js/scheduler/studyScheduler.js?v=1" defer></script>
+    <script src="js/scheduler/scheduleUI.js?v=1" defer></script>
+
+    <!-- Analytics (Lazy: Load when analytics tab is opened) -->
+    <script src="js/analytics/performanceCalculator.js?v=1" defer></script>
+    <script src="js/analytics/productivityScore.js?v=1" defer></script>
+    <script src="js/analytics/growthScore.js?v=1" defer></script>
+    <script src="js/analytics/charts.js?v=1" defer></script>
+    <script src="js/analytics/analytics.js?v=1" defer></script>
+    <script src="js/analytics/focusBlockerAnalytics.js?v=1" defer></script>
+    
+    <!-- AI Coach (Lazy: Load when AI Coach tab is opened) -->
+    <script src="js/ai-coach/behaviorAnalyzer.js" defer></script>
+    <script src="js/ai-coach/weakSubjectDetector.js" defer></script>
+    <script src="js/ai-coach/productivityPredictor.js" defer></script>
+    <script src="js/ai-coach/examPreparationAdvisor.js" defer></script>
+    <script src="js/ai-coach/studyPatternAnalyzer.js" defer></script>
+    <script src="js/ai-coach/motivationGenerator.js" defer></script>
+    <script src="js/ai-coach/studyRecommendationEngine.js" defer></script>
+    <script src="js/ai-coach/aiCoachEngine.js" defer></script>
+    <script src="js/ai-coach/coachUIRenderer.js" defer></script>
+    
+    <!-- AI Coach Event Integration -->
+    <script>
+        // Listen for app events and trigger AI Coach updates
+        document.addEventListener('focusSessionCompleted', () => {
+            if (typeof AICoachEngine !== 'undefined') {
+                AICoachEngine.recalculateInsights('focus_session_completed');
+            }
+        });
+        
+        document.addEventListener('taskCompleted', () => {
+            if (typeof AICoachEngine !== 'undefined') {
+                AICoachEngine.recalculateInsights('task_completed');
+            }
+        });
+        
+        document.addEventListener('habitUpdated', () => {
+            if (typeof AICoachEngine !== 'undefined') {
+                AICoachEngine.recalculateInsights('habit_updated');
+            }
+        });
+        
+        document.addEventListener('examAdded', () => {
+            if (typeof AICoachEngine !== 'undefined') {
+                AICoachEngine.recalculateInsights('exam_added');
+            }
+        });
+        
+        console.log('✅ AI Coach event listeners initialized');
+    </script>
+    
+    <!-- Initialize Sync Status Indicator -->
+    <script>
+        // Wait for all sync scripts to load, then initialize sync indicator
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeSyncIndicator);
+        } else {
+            initializeSyncIndicator();
+        }
+        
+        function initializeSyncIndicator() {
+            // Wait a bit to ensure sync scripts are fully loaded
+            setTimeout(() => {
+                if (window.showSyncIndicator) {
+                    // Show sync indicator in header
+                    window.showSyncIndicator('#syncIndicatorContainer');
+                    console.log('✅ Sync indicator initialized');
+                } else {
+                    console.warn('⚠️ Sync indicator not available yet, retrying...');
+                    setTimeout(initializeSyncIndicator, 500);
+                }
+            }, 100);
+        }
+    </script>
+</body>
+
+    <script>
+    (function(){
+            if (!('serviceWorker' in navigator)) return;
+            try {
+            var marker = 'prodify_cache_cleared_v3';
+            if (localStorage.getItem(marker)) return;
+            navigator.serviceWorker.getRegistrations().then(function(registrations){
+                return Promise.all(registrations.map(function(r){ return r.unregister(); }));
+            }).then(function(){
+                if (!('caches' in window)) {
+                    localStorage.setItem(marker, '1');
+                    location.reload();
+                    return;
+                }
+                caches.keys().then(function(keys){
+                    return Promise.all(keys.filter(function(k){ return k && k.indexOf('prodify-') === 0; }).map(function(k){ return caches.delete(k); }));
+                }).then(function(){
+                    localStorage.setItem(marker, '1');
+                    location.reload();
+                }).catch(function(){
+                    localStorage.setItem(marker, '1');
+                    location.reload();
+                });
+            }).catch(function(){
+                localStorage.setItem(marker, '1');
+            });
+        } catch (e) {
+            try { localStorage.setItem('prodify_cache_cleared_v2', '1'); } catch (e){}
+        }
+    })();
+    </script>
+
+</html>
