@@ -68,7 +68,7 @@ Added all 7 background sync scripts in the correct order:
 
 **Files Modified:**
 1. [www/js/core/data.js](www/js/core/data.js) - Updated 4 key functions
-2. [DATA_JS_MIGRATION_EXAMPLES.md](DATA_JS_MIGRATION_EXAMPLES.md) - Complete migration guide created
+2. [data-migration-examples.md](../data-migration-examples.md) - Complete migration guide created
 
 **Functions Updated:**
 
@@ -127,7 +127,7 @@ async function loadTasks() {
 
 ## 📚 Documentation Created
 
-### [DATA_JS_MIGRATION_EXAMPLES.md](DATA_JS_MIGRATION_EXAMPLES.md)
+### [data-migration-examples.md](../data-migration-examples.md)
 
 Complete guide with:
 - ✅ 9 migration patterns (Tasks, Habits, Focus Sessions, Subjects, Notes, etc.)
@@ -151,26 +151,26 @@ Complete guide with:
    - ✅ Auto-sync begins (every 30 seconds)
 
 2. **When Creating a Task:**
-   ```javascript
-   // Your existing code still works!
-   saveTask("My New Task", taskId, false);
-   // ↓
-   // Now saves to IndexedDB
-   // ↓
-   // Auto-syncs to Firestore in background
-   // ↓
-   // Sync indicator updates: 🔄 → ✅
-   ```
+```javascript
+// Your existing code still works!
+saveTask("My New Task", taskId, false);
+// ↓
+// Now saves to IndexedDB
+// ↓
+// Auto-syncs to Firestore in background
+// ↓
+// Sync indicator updates: 🔄 → ✅
+```
 
 3. **When Offline:**
-   - ✅ Tasks save to IndexedDB (works offline!)
-   - ✅ Sync indicator shows: 📡 Offline
-   - ✅ Data queued for sync
+- ✅ Tasks save to IndexedDB (works offline!)
+- ✅ Sync indicator shows: 📡 Offline
+- ✅ Data queued for sync
 
 4. **When Back Online:**
-   - ✅ Sync indicator shows: 🔄 Syncing...
-   - ✅ All offline changes sync automatically
-   - ✅ Sync indicator shows: ✅ Synced
+- ✅ Sync indicator shows: 🔄 Syncing...
+- ✅ All offline changes sync automatically
+- ✅ Sync indicator shows: ✅ Synced
 
 ---
 
@@ -180,12 +180,12 @@ Complete guide with:
 
 1. **Open your app** in browser (refresh the page)
 2. **Check console** for:
-   ```
-   ✅ Network Monitor initialized
-   ✅ Sync Manager initialized
-   ✅ Service Worker installed
-   ✅ Sync indicator initialized
-   ```
+```
+✅ Network Monitor initialized
+✅ Sync Manager initialized
+✅ Service Worker installed
+✅ Sync indicator initialized
+```
 3. **Look at header** - You should see the sync indicator badge
 4. **Test offline:**
    - Open DevTools (F12)
@@ -244,7 +244,7 @@ The following functions in data.js still use localStorage and should be updated 
 - [ ] `saveNote()` - Create note
 - [ ] And many others...
 
-**Use the patterns in [DATA_JS_MIGRATION_EXAMPLES.md](DATA_JS_MIGRATION_EXAMPLES.md) to update them!**
+**Use the patterns in [data-migration-examples.md](../data-migration-examples.md) to update them!**
 
 ### Currently Working:
 
@@ -350,11 +350,11 @@ All offline changes will automatically sync to Firebase Firestore when the devic
 
 ## 📖 Additional Resources
 
-- [BACKGROUND_SYNC_GUIDE.md](BACKGROUND_SYNC_GUIDE.md) - Complete system documentation
-- [DATA_JS_MIGRATION_EXAMPLES.md](DATA_JS_MIGRATION_EXAMPLES.md) - Migration patterns for all functions
-- [INDEXEDDB_INTEGRATION_GUIDE.md](INDEXEDDB_INTEGRATION_GUIDE.md) - IndexedDB API reference
-- [INDEXEDDB_QUICK_REFERENCE.md](INDEXEDDB_QUICK_REFERENCE.md) - Quick API lookup
-- [INDEXEDDB_ROADMAP.md](INDEXEDDB_ROADMAP.md) - Implementation roadmap
+-- [background-sync.md](../background-sync.md) - Complete system documentation
+-- [data-migration-examples.md](../data-migration-examples.md) - Migration patterns for all functions
+-- [indexeddb-guide.md](../indexeddb-guide.md) - IndexedDB API reference
+-- [indexeddb-quickref.md](../indexeddb-quickref.md) - Quick API lookup
+-- [indexeddb-roadmap.md](../indexeddb-roadmap.md) - Implementation roadmap
 
 ---
 

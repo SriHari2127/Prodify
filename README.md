@@ -1,61 +1,115 @@
-# Prodify — Documentation Summary
+# Prodify
 
-This repository is public for viewing and learning purposes only.
+Prodify is a client-side study productivity web application (packaged optionally with Capacitor for Android). It combines task management, focus tools, scheduling, and an AI-driven coach to help students plan, focus, and track progress — even offline.
 
-You may not copy, reuse, modify, redistribute, or commercialize this code without explicit permission.
+This README gives a concise overview, lists current features, explains how to run and build the project, and links to detailed docs in the `docs/` folder.
 
-This README consolidates the current features, architecture notes, and links to the detailed guides stored in this `docs/` folder. Use this as the single entry point for contributors and reviewers.
+**Repository status:** public for viewing and learning only. Do not copy, reuse, redistribute, or commercialize the code without explicit permission.
 
-## Project Overview
+**Table of contents**
 
-Prodify is a client-side web application (also packaged via Capacitor for Android) focused on study productivity. The app is implemented as a single-page web app under `www/` and uses IndexedDB for offline storage, a service worker for caching, and modular JavaScript for features.
+- Project overview
+- Key features
+- Quick start (dev)
+- Building for production / Android
+- Architecture & folders
+- Docs and where to look
+- Contributing
+- License & notes
 
-Core user-facing features:
-- Tasks and subtasks with progress tracking
-- Focus Mode with blockers and session summaries
-- AI Coach: study recommendations, behavior analysis, and motivational messaging
-- Calendar & scheduling (Smart Scheduler)
-- Notifications and local push handling
-- Cross-device sync and background sync support
-- Notes, Habits, and Gamification features
+**Project overview**
 
-## Architecture (high level)
+Prodify is implemented as a single-page web app under `www/` built with vanilla HTML/CSS/JavaScript. It is designed to work offline using IndexedDB and a service worker, and includes optional native wrappers (Capacitor) for mobile distribution.
 
-- Frontend: Vanilla HTML/CSS/JavaScript in `www/` (no framework)
-- Storage: IndexedDB (adapter layer in `www/js/core/indexedDB-adapter.js`)
-- Offline: Service worker in `www/service-worker.js` with caching strategies
-- Native: Capacitor wrapper for Android integrations (build files under `android/`)
-- Modular JS: features grouped under `www/js/` (core, ai-coach, calendar, tasks, focus, sync, etc.)
+**Key features (current)**
 
-## Where To Find Detailed Docs
+- Task management: tasks, subtasks, deadlines, and progress tracking.
+- Focus Mode: distraction blockers, timed sessions, session summaries, and analytics.
+- AI Coach: study recommendations, behavior analysis, motivation messages, and personalized suggestions (see `docs/ai-coach-documentation.md`).
+- Smart Scheduler & Calendar: smart task scheduling and calendar integration for planning study sessions.
+- Local Notifications: in-app and system/local notifications with rules and queues for reminders.
+- Cross-device sync: background sync and cross-device data reconciliation (see `docs/cross-device-sync.md`).
+- Notes & Habits: lightweight notes and habit tracking integrated with tasks.
+- Gamification: XP, levels, badges, and progress incentives.
+- Offline-first storage: IndexedDB adapter with migration helpers and sync adapters.
+- Service worker caching for fast startup and offline operation.
 
-- AI Coach: [AI_COACH_SUMMARY.md](docs/AI_COACH_SUMMARY.md) and [AI_COACH_DOCUMENTATION.md](docs/AI_COACH_DOCUMENTATION.md)
-- Focus Blocker and Focus Mode: [FOCUS_BLOCKER_GUIDE.md](docs/FOCUS_BLOCKER_GUIDE.md)
-- Cross-device sync: [CROSS_DEVICE_SYNC_DOCUMENTATION.md](docs/CROSS_DEVICE_SYNC_DOCUMENTATION.md) and [CROSS_DEVICE_SYNC_QUICK_START.md](docs/CROSS_DEVICE_SYNC_QUICK_START.md)
-- Background sync & startup: [BACKGROUND_SYNC_GUIDE.md](docs/BACKGROUND_SYNC_GUIDE.md) and [STARTUP_OPTIMIZATION_COMPLETE.md](docs/STARTUP_OPTIMIZATION_COMPLETE.md)
-- IndexedDB integration & migration guides: [INDEXEDDB_INTEGRATION_GUIDE.md](docs/INDEXEDDB_INTEGRATION_GUIDE.md), [INDEXEDDB_QUICK_REFERENCE.md](docs/INDEXEDDB_QUICK_REFERENCE.md), [INDEXEDDB_ROADMAP.md](docs/INDEXEDDB_ROADMAP.md), [DATA_JS_MIGRATION_EXAMPLES.md](docs/DATA_JS_MIGRATION_EXAMPLES.md)
-- Notifications: [NOTIFICATION_SYSTEM_GUIDE.md](docs/NOTIFICATION_SYSTEM_GUIDE.md) and [NOTIFICATION_SYSTEM_COMPLETE.md](docs/NOTIFICATION_SYSTEM_COMPLETE.md)
-- Smart Scheduler: [SMART_SCHEDULER_README.md](docs/SMART_SCHEDULER_README.md)
-- Integration checklist and completion notes: [INTEGRATION_COMPLETE.md](docs/INTEGRATION_COMPLETE.md), [PREMIUM_MOBILE_EXPERIENCE_COMPLETE.md](docs/PREMIUM_MOBILE_EXPERIENCE_COMPLETE.md)
+Quick links to the code that implements major features:
 
-## Quick Developer Setup
+- Core app shell: `www/index.html` and `www/js/core/ui.js`
+- IndexedDB adapter: `www/js/core/indexedDB-adapter.js`
+- Service worker: `www/service-worker.js`
+- AI Coach: `www/js/ai-coach/` (engines and UI)
+- Focus features: `www/js/focus/` (focusBlocker.js, focusLockMode.js)
 
-1. Install Node.js and optional tooling (if building web assets).
-2. From the repo root run: `npm install` (if this project has a package.json). See root `package.json` for scripts.
-3. Serve `www/` locally (any static server) or open `www/index.html` in the browser.
-4. For Android builds, follow Capacitor docs and run the Gradle wrapper in `android/`.
+Quick start (development)
 
-## Current Known Notes / Caveats
+1. Install Node.js (recommended) and optional tooling.
+2. From the repo root, install dependencies if present:
 
-- Service worker caching can cause stale CSS/JS to persist for users. A cache-bust is used on `index.html` and a one-time auto-clear helper script was added for development.
-- The app supports both mobile and desktop layouts; some layout rules differ between the two and are controlled via `deviceManager`/`deviceOptimizationEngine` logic.
-- Sensitive Android files (e.g. `android/app/google-services.json`) should not be committed — `.gitignore` has been updated accordingly.
+```bash
+npm install
+```
 
-## Suggested Cleanup (review before applying)
+3. Serve the `www/` folder with a static server for local testing. Example using `http-server`:
 
-These files look like completion notes or duplicates and can be removed or archived if you want a smaller docs surface. Confirm which of the following you want deleted and I will remove them:
+```bash
+npx http-server www -c-1 -o
+```
 
-- `docs/INTEGRATION_COMPLETE.md` (integration checklist already covered in other docs)
-- `docs/NOTIFICATION_SYSTEM_COMPLETE.md` (duplicate of `docs/NOTIFICATION_SYSTEM_GUIDE.md`)
-- `docs/PREMIUM_MOBILE_EXPERIENCE_COMPLETE.md` (summary/notes related to mobile premium experience)
-- `docs/STARTUP_OPTIMIZATION_COMPLETE.md` (final notes; may be archived)
+4. Open `http://localhost:8080` (or the port printed by your server) and test the app. For faster iteration, open DevTools and disable the service worker, or use a development service-worker configuration.
+
+Building for production / Android (Capacitor)
+
+- Web production: build or minify your `www/` assets using your chosen bundler/tooling, then deploy the `www/` output to your hosting.
+- Android via Capacitor:
+
+```bash
+# generate native project (if not present)
+npx cap init
+npx cap add android
+npx cap copy android
+npx cap open android
+```
+
+Follow Capacitor docs to build with Android Studio. Do not commit secrets such as `google-services.json`.
+
+Architecture & folder map
+
+- `www/` — single-page web app, UI and JS modules
+- `www/js/core/` — core utilities, indexedDB adapter, startup manager
+- `www/js/ai-coach/` — AI coach engine and UI renderer
+- `www/js/focus/` — focus blocker & lock mode code
+- `docs/` — detailed guides (sync, AI coach, indexedDB, notifications, etc.)
+
+Where to find detailed docs
+
+- AI Coach: [docs/ai-coach-summary.md](docs/ai-coach-summary.md) and [docs/ai-coach-documentation.md](docs/ai-coach-documentation.md)
+- Focus Blocker: [docs/focus-blocker.md](docs/focus-blocker.md)
+- Cross-device sync: [docs/cross-device-sync.md](docs/cross-device-sync.md)
+- IndexedDB: [docs/indexeddb-guide.md](docs/indexeddb-guide.md)
+- Notifications: [docs/notifications.md](docs/notifications.md)
+
+Contributing
+
+- Read the docs in `docs/` before changing sync, storage, or notification code.
+- Open an issue describing the change or improvement you plan to make.
+- Follow existing code style (vanilla ES modules), keep changes focused, and include tests or manual verification steps when possible.
+
+Notes & Caveats
+
+- Service worker caching can cause stale assets to persist; use cache-busting and versioning when publishing updates.
+- Some device-specific behavior is implemented in Capacitor/native wrappers — test on device emulators when adjusting integrations.
+- Sensitive configuration files must not be committed (check `.gitignore`).
+
+License
+
+See the `LICENSE` file in the repository root for terms and restrictions.
+
+If you'd like I can:
+
+- Move older completion docs to `docs/archive/`.
+- Produce a short changelog based on `docs/` contents.
+- Generate a trimmed README suitable for publishing to npm or a public project page.
+
+Tell me which of these (if any) you want next.
