@@ -51,6 +51,7 @@ desktop.ini
 # Environment / secrets
 .env
 .env.*
+www/js/core/firebase-config.local.js
 
 # Logs and temp
 *.log

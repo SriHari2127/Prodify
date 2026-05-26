@@ -59,6 +59,12 @@ npx http-server www -c-1 -o
 
 4. Open `http://localhost:8080` (or the port printed by your server) and test the app. For faster iteration, open DevTools and disable the service worker, or use a development service-worker configuration.
 
+Firebase configuration
+
+- The app now reads Firebase settings from a local override script: `www/js/core/firebase-config.local.js`.
+- Copy `www/js/core/firebase-config.local.example.js` to `www/js/core/firebase-config.local.js` and fill in your own project values before running auth or sync features.
+- The local override file is ignored by Git so the committed repo stays free of project-specific Firebase values.
+
 Building for production / Android (Capacitor)
 
 - Web production: build or minify your `www/` assets using your chosen bundler/tooling, then deploy the `www/` output to your hosting.
